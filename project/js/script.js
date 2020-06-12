@@ -597,82 +597,255 @@
 
 //let numberOfFilms; эту переменную мы удаляем и заменяем ее в объекте на personalMoveDB.count
 
-    const personalMoveDB = {
-        count: 0,
-        movies: {},
-        actors: {},
-        genres: [],
-        privat: false,
-        start: function() {
-          personalMoveDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');          
-              while(personalMoveDB.count == '' || personalMoveDB.count == null || isNaN(personalMoveDB.count)) {
-                personalMoveDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
-              }
-      },
+//     const personalMoveDB = {
+//         count: 0,
+//         movies: {},
+//         actors: {},
+//         genres: [],
+//         privat: false,
+//         start: function() {
+//           personalMoveDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');          
+//               while(personalMoveDB.count == '' || personalMoveDB.count == null || isNaN(personalMoveDB.count)) {
+//                 personalMoveDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
+//               }
+//       },
 
-       rememberMyFilms: function() {
-        for (let i = 0; i < 2; i++) {
-          const a = prompt('Один из последних просмотренных фильмов?', ''),
-                b = prompt('На сколько оцените его?', '');             
-                if (a != '' && b != '' && a != null && b != null && a.length < 50) {  
-                 personalMoveDB.movies[a] = b;         
-                 console.log('done');           
-                } else {            
-                  console.log('error');
-                  i--;
-                }
-              }
-        },
+//        rememberMyFilms: function() {
+//         for (let i = 0; i < 2; i++) {
+//           const a = prompt('Один из последних просмотренных фильмов?', ''),
+//                 b = prompt('На сколько оцените его?', '');             
+//                 if (a != '' && b != '' && a != null && b != null && a.length < 50) {  
+//                  personalMoveDB.movies[a] = b;         
+//                  console.log('done');           
+//                 } else {            
+//                   console.log('error');
+//                   i--;
+//                 }
+//               }
+//         },
 
-        detectPersonalLevel: function () {
-          if (personalMoveDB.count <= 10) {
-                console.log('Просмотрено довольно мало фильмов');
-             } else if (personalMoveDB.count <= 30) {
-                console.log('Вы классический зритель');
-              } else if (personalMoveDB.count > 30) {
-                console.log('Вы киноман');
-             } else {
-                console.log('Произошла ошибка');
-              }
-          },
+//         detectPersonalLevel: function () {
+//           if (personalMoveDB.count <= 10) {
+//                 console.log('Просмотрено довольно мало фильмов');
+//              } else if (personalMoveDB.count <= 30) {
+//                 console.log('Вы классический зритель');
+//               } else if (personalMoveDB.count > 30) {
+//                 console.log('Вы киноман');
+//              } else {
+//                 console.log('Произошла ошибка');
+//               }
+//           },
 
-          showMyDB: function (hidden) {
-            if(!hidden) {
-              console.log(personalMoveDB);
-            }  
-        },
+//           showMyDB: function (hidden) {
+//             if(!hidden) {
+//               console.log(personalMoveDB);
+//             }  
+//         },
 
-        toggleVisibleMyDB: function () {
-          if(personalMoveDB.privat) {
-            personalMoveDB.privat = false;
-          } else {
-             personalMoveDB.privat = true;
-          }            
-        },
+//         toggleVisibleMyDB: function () {
+//           if(personalMoveDB.privat) {
+//             personalMoveDB.privat = false;
+//           } else {
+//              personalMoveDB.privat = true;
+//           }            
+//         },
 
-          writeYourGenres: function () { 
-            for(let i = 1; i <= 3; i++) { // начинаем с i = 1, так как обыватель не привык вести отсчет с 0 
-              let genre = prompt(`Ваш любимый жанр под номером ${i}`, '');
+//           writeYourGenres: function () { 
+//             // for(let i = 1; i <= 3; i++) { // начинаем с i = 1, так как обыватель не привык вести отсчет с 0 
+//               // let genre = prompt(`Ваш любимый жанр под номером ${i}`, '');
              
-              if (genre == "" || genre == null) {
-                console.log('Вы ввели некорректоные данные или не ввели их вовсе');
-                i--;
-              } else {
-                personalMoveDB.genres[i - 1] = genre;
-              }
-          }
-          personalMoveDB.genres.forEach((item, i) => {
-            console.log(`Любимый жанр ${i + 1} - это ${item}`);
-          });
-        }                
-          };
+//               // if (genre == "" || genre == null) {
+//               //   console.log('Вы ввели некорректоные данные или не ввели их вовсе');
+//               //   i--;
+//               // } else {
+//               //   personalMoveDB.genres[i - 1] = genre;
+//               // }
+// // Еще как вариант ниже:
+//           for(let i = 1; i < 2; i++) { // Цикл запускается один раз, так как все записываается через запятую    
+//                let genres = prompt(`Введите ваши любимые жанры через запятую`).toLocaleLowerCase();// Метод
+//                //.toLocaleLowerCase() служит для перевода строк в нижний регистр, поскольку заглавные буквы
+//                //перебивают строчные, то сортировка по методу .split() не будет нормально функционировать.
+             
+//               if (genres == "" || genres == null) {
+//                 console.log('Вы ввели некорректоные данные или не ввели их вовсе');
+//                 i--;
+//               } else {
+//                 personalMoveDB.genres[i - 1] = genres.split(', '); // Метод .split - запишет в массив через запятую
+//                 personalMoveDB.genres.sort();// Отсортирует жанры по алфавиту
+//               }
+
+//           }
+//           personalMoveDB.genres.forEach((item, i) => {
+//             console.log(`Любимый жанр ${i + 1} - это ${item}`);
+//           });
+//         }                
+//           };
         
-        personalMoveDB.writeYourGenres();
+//         personalMoveDB.writeYourGenres();
+
+
+
+
+                        //ОТЛАВЛИВАЕМ ОШИБКИ В КОДЕ ПРИ ПОМОЩИ КОНСОЛИ РАЗРАБОТЧИКА. BREAKPOINTS
+
+                  //ДИНАМИЧЕСКАЯ ТИПИЗАЦИЯ В JS - возможность одного типа данных превращаться в другой
+
+                          //STRING
+                
+// При сложении со сторокой (конкатенация) всегда будет строка пример:
+//       console.log(typeof(5 + ''));
         
-       
+//       const fontSize = 27 + 'px';
   
+//                           //NUMBER 
+
+// // Унарный плюс меняет строку в числовой тип данных
+//       console.log(typeof(+'5'));
+
+
+//                           //BOOLEAN
+
+//   // 0, '', null, undefinded, NaN - значение false, если в пустой строке ' ' стоит пробел, это уже не false
+//   // Пустые объекты и массивы - это true
+
+//       let swither = null; // эта функция не сработает, так как swither передает значение false, если поставить 
+//       if (swither) {// значение 1, то сработает, так как передаться значение true
+//         console.log('Working...');
+//       }
+      
+//       console.log(typeof(Boolean('4444'))); //Превратиться в булиновое значение
+//       console.log(typeof(!!'4444')); //Превратиться в булиновое значение благодаря двойному знаку отрицания !!
+
+
+                                        //ПОЛУЧЕНИЕ ЭЛЕМЕНТОВ СО СТРАНИЦЫ 28 урок
+
+    //                                     //Старые методы 
+
+    // const box = document.getElementById('box');// посредством метода getElementById мы находим id на странице html
+    // // id должени быть один, иначе js запутается.
+    //       console.log(box);
+
+    //const btns = document.getElementsByTagName('button');// Поиск по тегам.В переменную btns записываются все кнопки, 
+    // //работать с ними не получится, потому что это псевдомассив. Для того чтобы выбрать одну кнопку из массива, нужно
+    // //поставить [0] ее порядковый номер, пример:
+    // console.log(btns[0]);// Теперь мы можем работать с первой кнопкой 
+
+    // const circles = document.getElementsByClassName('circles');// Поиск по классам. Точку ставить не нужно(.circles)
+    //   console.log('circles');                                  // так как JS понимает, что мы уже ищем класс
+
+
+    //                       //Современные методы
+
+    // const hearts = document.querySelectorAll('.heart');//Ищет любой селектор указанный в скобках. Если ищем селектор
+    // // по классу, то необходимо ставить точку, так как в отличие от конкретного поиска класса по методу
+    // // getElementsByClassName метод querySelectorAll - не понимает, что мы ищем именно класс.
+    // //Только метод querySelectorAll свободен от ограничений псевдомассивов, то есть может применять методы к массиву.
+    //   hearts.forEach(item => { // Применяем метод .forEach для массива hearts
+    //       console.log(item);
+    //   });
+
+    // // Еще один метод:
+    // const oneHeart = document.querySelector('.heart');
+    //       console.log(oneHeart); //Метод .querySelector выводит первый найденный селектор (пр: первую кнопку)
+
+
+
+                                    // ДЕЙСТВИЯ С ЭЛЕМЕНТАМИ НА СТРАНИЦЕ 29 урок
+
+                                 
+    // Применение стилей в JS они являются inline, то есть важнее CSS, поэтому и применяются
+
+//     const box = document.getElementById('box'),
+//           btns = document.getElementsByTagName('button'),
+//           circles = document.getElementsByClassName('circles'),
+//           wrapper = document.querySelector('.wrapper'),  
+//           hearts = document.querySelectorAll('.heart'), //После объявления переменной wrapper, можно искать уже не 
+//           oneHeart = document.querySelector('.heart');//в document, а hearts = wrapper.querySelectorAll('.heart')    
+                 
+
+//     box.style.backgroundColor = 'blue'; //Вместо - в js употребляется формат камелКейс
+//     box.style.width = '500px'; // Значение 500 обязательно оформляем в кавычки и устанвливаем ед. измерения
+//     // При помощи кода ниже мы можем прописать точно такие же параметры, но в css коде в строчном фомате js, пр:
+//     box.style.cssText = 'background-color: red; width: 500px;';
+
+
+//     btns[1].style.borderRadius = '100%'; // Обязательно необходимо указывать [1], ведь псевдомассив не знает
+//     // что такое методы и не выполнит задачу если мы просто укажем btns.style.borderRadius = '100%';
+//     // нужна конкретика. Для того чтобы применить свойства ко всем элементам можно обратитсья к циклам, пр:
+//       // for (let i = 0; i < hearts.length; i++) {
+//       //   hearts[i].style.backgroundColor = 'red';
+//       // }// Это геморно, есть способ проще:
+//       hearts.forEach(item => {
+//           item.style.backgroundColor = 'blue';
+//       });// item - перебирает сердечки, то есть hearts и задает им стиль backgroundColor = 'red';
+
+//     const div = document.createElement('div'); //Создает элемент div, но только в js коде, на странице его пока нет
+//         div.classList.add('black');
+
+//         // document.body.append(div);// Эта команда выводит наш div в конец тега body в html файле
+
+//         // document.querySelector('.wrapper').append(div); // Добавляет в класс wrapper в html странице тег div
+
+//         wrapper.prepend(div); // Этот метод помещает в начало тег div
+//         // hearts[0].before(div); // Этот метод помещает div перед hearts[0]
+//         // hearts[0].after(div); // Этот метод помещает div после hearts[0]
+//         // circles[0].remove(); // Этот метод удаляет круг
+//         // hearts[0].replaceWith(circles[0]); // Этот метод меняет один элемент на другой
+
+//     div.innerHTML = '<h1>Hello world</h1>'; // Выводит текст в html
+//  // div.textContent = 'Hello'; //Тоже самое, но выводит только текст, теги <h1></h1> вылезут тоже. Поэтому, если  
+//  // мы хотим от пользователя получить текст, то лучше в целях безопасности использовать данный метод
+
+//  div.insertAdjacentHTML('beforebegin', '<h2>Hello</h2>');// Также выводит текст '<h2>Hello</h2>' в HTML до тега div
 
 
 
 
-   
+                                                 //TASK 5
+
+                                                 
+
+/*1) Удалить все рекламные блоки со страницы (правая часть сайта)
+
+2) Изменить жанр фильма, поменять "комедия" на "драма"
+
+3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
+Реализовать только при помощи JS
+
+4) Список фильмов на странице сформировать на основании данных из этого JS файла.
+Отсортировать их по алфавиту 
+
+5) Добавить нумерацию выведенных фильмов */
+
+
+const movieDB = {
+    movies: [
+        "Логан",
+        "Лига справедливости",
+        "Ла-ла лэнд",
+        "Одержимость",
+        "Скотт Пилигрим против..."
+    ]
+};
+
+const adv = document.querySelectorAll('.promo__adv img'),//Выбираем img, так как обращаемся к картинкам
+      poster = document.querySelector('.promo__bg'),
+      genre = poster.querySelector('.promo__genre'),// Выставляем poster, так как .promo__genre находится внутри его
+      movieList = document.querySelector('.promo__interactive-list');
+        adv.forEach(item => {// Перебираем массив
+          item.remove(); 
+        });
+        genre.textContent = 'Драмма';
+        poster.style.backgroundImage = 'url("img/bg.jpg")';// Важно, чтобы кавычки были разные!!!  
+        movieList.innerHTML = '';//Путсые кавычки делают класс .promo__interactive-list пустым
+        
+        movieDB.movies.sort();//Сортируем объект по алфавиту
+        movieDB.movies.forEach((film, i) => {//Перебираем объект и выносим каждое += значение movies в movieList в HTML 
+            movieList.innerHTML += `         
+                <li class="promo__interactive-item">${i + 1} ${film}
+                    <div class="delete"></div>
+                </li>
+            `;
+        });// ${i + 1} делаем индекс +1 чтобы порядковый номер из массива выводился начиная с 1, а не 0
+           // ${film} film это movies - в него запишутся все фильмы по порядку при поэтапной итерации
+           // итерация  и присвоение происходит благодаря аргументам +=, поэтому i без ++.

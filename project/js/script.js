@@ -1018,3 +1018,39 @@
 //             createMovieList(movieDB.movies, movieList);   
 //         });
 
+
+
+
+
+                                         //СОБЫТИЯ НА МОБИЛЬНЫХ УСТРОЙСТВАХ
+
+                                    
+//События touchstart - коснулись пальцем экрана
+//        touchmove - провели пальцем по экрану
+//        touchend
+//        touchenter - палец при движении по экрану залес на определенную область
+//        touchleave - палец при скольжении по экрану ушел за пределы элемента
+//        touchcancel - к примеру палец вышел за пределы браузера
+
+window.addEventListener('DOMContentLoaded', () => {
+    const box = document.querySelector('.box');
+
+    box.addEventListener('touchstart', (e) => {
+        e.preventDefault(); //На мобилках лучше всегда применять отмену стандартного поведения браузера
+
+        console.log('Start');
+    });
+
+        box.addEventListener('touchmove', (e) => {
+            e.preventDefault(); //На мобилках лучше всегда применять отмену стандартного поведения браузера
+    
+            console.log('Move');
+        });
+
+    
+    box.addEventListener('touchend', (e) => {
+        e.preventDefault(); //На мобилках лучше всегда применять отмену стандартного поведения браузера
+
+        console.log('End');
+    });
+});

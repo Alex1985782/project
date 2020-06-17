@@ -805,47 +805,216 @@
 
                                                  
 
-/*1) Удалить все рекламные блоки со страницы (правая часть сайта)
 
-2) Изменить жанр фильма, поменять "комедия" на "драма"
+// const movieDB = {
+//     movies: [
+//         "Логан",
+//         "Лига справедливости",
+//         "Ла-ла лэнд",
+//         "Одержимость",
+//         "Скотт Пилигрим против..."
+//     ]
+// };
 
-3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
-Реализовать только при помощи JS
-
-4) Список фильмов на странице сформировать на основании данных из этого JS файла.
-Отсортировать их по алфавиту 
-
-5) Добавить нумерацию выведенных фильмов */
-
-
-const movieDB = {
-    movies: [
-        "Логан",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против..."
-    ]
-};
-
-const adv = document.querySelectorAll('.promo__adv img'),//Выбираем img, так как обращаемся к картинкам
-      poster = document.querySelector('.promo__bg'),
-      genre = poster.querySelector('.promo__genre'),// Выставляем poster, так как .promo__genre находится внутри его
-      movieList = document.querySelector('.promo__interactive-list');
-        adv.forEach(item => {// Перебираем массив
-          item.remove(); 
-        });
-        genre.textContent = 'Драмма';
-        poster.style.backgroundImage = 'url("img/bg.jpg")';// Важно, чтобы кавычки были разные!!!  
-        movieList.innerHTML = '';//Путсые кавычки делают класс .promo__interactive-list пустым
+// const adv = document.querySelectorAll('.promo__adv img'),//Выбираем img, так как обращаемся к картинкам
+//       poster = document.querySelector('.promo__bg'),
+//       genre = poster.querySelector('.promo__genre'),// Выставляем poster, так как .promo__genre находится внутри его
+//       movieList = document.querySelector('.promo__interactive-list');
+//         adv.forEach(item => {// Перебираем массив
+//           item.remove(); 
+//         });
+//         genre.textContent = 'Драмма';
+//         poster.style.backgroundImage = 'url("img/bg.jpg")';// Важно, чтобы кавычки были разные!!!  
+//         movieList.innerHTML = '';//Путсые кавычки делают класс .promo__interactive-list пустым
         
-        movieDB.movies.sort();//Сортируем объект по алфавиту
-        movieDB.movies.forEach((film, i) => {//Перебираем объект и выносим каждое += значение movies в movieList в HTML 
-            movieList.innerHTML += `         
-                <li class="promo__interactive-item">${i + 1} ${film}
-                    <div class="delete"></div>
-                </li>
-            `;
-        });// ${i + 1} делаем индекс +1 чтобы порядковый номер из массива выводился начиная с 1, а не 0
-           // ${film} film это movies - в него запишутся все фильмы по порядку при поэтапной итерации
-           // итерация  и присвоение происходит благодаря аргументам +=, поэтому i без ++.
+//         movieDB.movies.sort();//Сортируем объект по алфавиту
+//         movieDB.movies.forEach((film, i) => {//Перебираем объект и выносим каждое значение movies в movieList в HTML 
+//             movieList.innerHTML += `         
+//                 <li class="promo__interactive-item">${i + 1} ${film}
+//                     <div class="delete"></div>
+//                 </li>
+//             `;
+//         });// ${i + 1} делаем индекс +1 чтобы порядковый номер из массива выводился начиная с 1, а не 0
+//            // ${film} film это movies - в него запишутся все фильмы по порядку при поэтапной итерации
+//            // итерация  и присвоение происходит благодаря аргументам +=, поэтому i без ++.
+
+
+
+
+                            //CОБЫТИЯ И ИХ ОБРАБОТЧИКИ (event - событие (e))
+
+    //Всплытие событий это когда обработчик события сначала срабатывает на самом вложенном элементе, 
+    //затем на родителе и так до самого верха  
+
+    // const btn = document.querySelector('button');
+    //       btn.addEventListener('click', () => {// Назначаем событие addEventListener, где 'Click' действие 
+    //         alert('Click');                 // пользоавателя, а () => это callback функция запускающая alert
+    //       });
+
+    // const btn = document.querySelector('button');
+    //       btn.addEventListener('click', (e) => {// В (e) сокращенно записано event(название может быть любым), 
+    //       console.log(e.target); // где по 'Click' на button, это действие пользователя при помощи функции   
+    //       e.target.remove();  // () => callback  сохраняется в консоль, также благодаря этой функции 
+    //       });       // выполнятеся команда  e.target.remove() удаление кнопки  
+    // Иными словами метод target фиксирует события пользователя и позволяет выполнять дальнейшие действия с объектом
+    
+    // let i = 0;
+    // const btn = document.querySelector('button'),
+    //       deleteElement = (e) =>{
+    //          console.log(e.target);
+    //          i++;
+    //          if (i == 1) {// После того как функция выполнится - i будет = 1
+    //             btn.removeEventListener('click', deleteElement);// внизу .addEventListener - назначаем обработчик, 
+    //          }                                                  // а здесь удаляем, так как событие произошло (i = 1)
+    //       };
+
+    // btn.addEventListener('click', deleteElement); // После того как выполнится 'click' по элементу btn, сработает
+    // // функция deleteElement, то есть мы ее не вызываем и поэтому скобки в конце не ставим - deleteElement(), а
+    // // лишь говорим, что она будет выполнятся
+
+    // const link = document.querySelector('a'); //Выбираем в документе HTML ссылку, функцией .preventDefault()
+    //     event.addEventListener('click', (event) => {//отменяем переход по ссылке и колбэком выводим в консоль
+    //         event.preventDefault();// событие пользователя
+    //         console.log(event.target);
+    //     });
+    
+        // const btns = document.querySelector('button');
+        //     btns.forEach(item => {
+        //         btn.addEventListener('click', deleteElement, {once: true});//{once: true} - это опция к deleteElement
+        //     });//Перебор необходим чтобы назначать один обработчик сразу на несколько элементов
+
+
+
+
+                            //НАВИГАЦИЯ ПО DOM - ЭЛЕМЕНТАМ, data-АТРИБУТЫ, ПРЕИМУЩЕСТВО for/of
+
+// // Существуют методы, которые позволяют путешествовать по DOM дереву
+// console.log(document.body.childNodes);// Метод .childNodes позволяет получить все ноды(элементы) все узлы, которые 
+// //находятся внутри родителя body. Чтобы получить последний или первый элемент, есть свойства(типа методы), пр:
+//    console.log(document.body.lastChild);
+//    console.log(document.body.firstChild);
+
+// // Если в примерах выше мы отталкивались от родителя (body), то также можно и отталкиваться от любого элемента,
+// // например через селектор можно путешествовать по дереву, и получить родителей, соседей и детей. пр:
+//    console.log(document.querySelector('#current').parentNode.parentNode);//В этом коде мы через селектор 'id=current'
+//     //размещенного в HTML коде поднимаемя выше сначала к одному родителю .parentNode, а затем повтороной командой
+//     //.parentNode - еще выше ко второму родителю. Команда с приставкой Node выводит в консоль как элементы так и 
+       // узлы, например перенос строки. Есть свойства(методы), которые выводят только элементы, пр:
+       //console.log(document.querySelector('#current').parentElement); или вместо .firstChild - .firstElementChild
+
+
+// // data-атрибут, прописывается в HTML коде как data-current="3", где data это комада языка, а current - наша фантазия
+// // "3" - это значение, оно как true, в принципе data- атрибуты можно испльзовать и без значения. Эти атрибуты были 
+// // придуманы в замен id селекторов, т. к. более удобнее. Чтобы получить data-атрибуты из HTML кода нужно прописать
+//        console.log(document.querySelector('[data-current="3"]').nextSibling); // Свойством .nextSibling мы получаем 
+//       // не родителей а соседей, но это может быть и не элемент, так как запрашивали и ноду. Чтобы вызвать именно 
+//       // элемент, есть команда .nextElementSibling, которая, к примеру выведет в консоль следующий элемент в списке.
+// Но чтобы вызвать элементы в команде document.body.childNodes возникают сложности, поскольку в языке такой команды нет
+// метод перебора forEach использовать не получится. Поэтому мы используем перебирающую конструкцию for/of.
+// Наша цель это избавиться от всех text - вых node. Если зайти в консоль, то мы увидим, что у объетка есть есть 
+// свойство nodeName: "#text", то есть название ноды, вот его то мы и будем использавать в условии if для перебора of
+// как условие, при котором эти текстовые ноды будут исключаться посредством continue, и програамма будет выполняться
+// дальше, пока не переберет все элементы, пример:
+        // for(let node of document.body.childNodes) { 
+        //     if(node.nodeName == '#text') {
+        //         continue;
+        //     }
+        //     console.log(node); 
+        // }
+
+
+
+                                                         //TASK 6
+
+                                                 
+// document.addEventListener('DOMContentLoaded', () => {//'DOMContentLoaded' - чтобы сначала загрузилась HTML, 
+//     const movieDB = {                              //а потом отрабатывал js.
+//         movies: [
+//             "Логан",
+//             "Лига справедливости",
+//             "Ла-ла лэнд",
+//             "Одержимость",
+//             "Скотт Пилигрим против..."
+//         ]
+//     };
+    
+    
+//     const adv = document.querySelectorAll('.promo__adv img'),//Выбираем img, так как обращаемся к картинкам
+//           poster = document.querySelector('.promo__bg'),
+//           genre = poster.querySelector('.promo__genre'),// Выставляем poster, т.к. .promo__genre находится внутри его
+//           movieList = document.querySelector('.promo__interactive-list'),
+//           addForm = document.querySelector('form.add'),
+//           addInput = addForm.querySelector('.adding__input'),
+//           checkbox = addForm.querySelector('[type="checkbox"]');//Лучше здесь искать по атрибутам
+
+//           addForm.addEventListener('submit', (event) => {
+//               event.preventDefault(); //Отменяет событие браузера по перезагрузке страницы
+
+//               let newFilm = addInput.value; //Чтобы получить название фильма
+//             const favorite = checkbox.checked; //Свойство checked служит как булиновое значение, об инфо о галочке
+
+//                     if (newFilm) {//Условие выполняется, если не пустая строка в форме
+
+//                         if (newFilm.length > 21) {
+//                             newFilm = `${newFilm.substring(0, 22)}...`;//Методом substring обрезаем длину названия  
+//                              // фильма после 22 символа и если название будет длиннее, то просто добавляем троеточие 
+//                         }
+
+//                         if (favorite) {//favorite выступает как true, то есть если галочка стоит, то выводим
+//                             console.log('Добавляем любимый фильм');
+
+//                         }
+//                         movieDB.movies.push(newFilm);//Метод push добавляет фильмы в массив movieDB.movies (сторока)
+//                         sortArr(movieDB.movies);
+//                         createMovieList(movieDB.movies, movieList); //Создает новый лист
+//                     }
+                
+//   event.target.reset();//Очищает форму после ее заполнения, то есть в addForm в ней было действие                    
+
+//           });
+
+//             const deleteAdv = (arr) => {
+//                 arr.forEach(item => {// Перебираем массив и удаляем рекламу
+//                     item.remove(); 
+//                   });
+//             };          
+           
+//             const makeChanges = () => {
+//                 genre.textContent = 'Драмма';
+//                 poster.style.backgroundImage = 'url("img/bg.jpg")';// Важно, чтобы кавычки были разные!!!  
+    
+//             };
+
+//             const sortArr = (arr) => {
+//                 arr.sort();
+//             };
+
+          
+//             function createMovieList(films, parent) {
+//                parent.innerHTML = '';//Путсые кавычки делают класс .promo__interactive-list пустым  
+//                sortArr(films);
+
+//                films.forEach((film, i) => {//Перебираем объект и выносим каждое значение movies в movieList в HTML 
+//                     parent.innerHTML += `         
+//                         <li class="promo__interactive-item">${i + 1} ${film}
+//                             <div class="delete"></div>
+//                         </li>
+//                     `;
+//                 });
+
+//                document.querySelectorAll('.delete').forEach((btn, i) => {
+//                    btn.addEventListener('click', () => {
+//                        btn.parentElement.remove();
+//                        movieDB.movies.splice(i, 1);//splice - это метод, который вырезает определенный элемент 
+//                                                    //из массива, i - это сам элемент, а 1 - номер эл. в массиве
+//         createMovieList(films, parent);//Вызываем здесь, чтобы порядковые номера после удаления обновлялись 
+
+//                    });
+//                });
+//             } 
+
+//             deleteAdv(adv);
+//             makeChanges();          
+//             createMovieList(movieDB.movies, movieList);   
+//         });
+

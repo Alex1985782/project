@@ -1158,5 +1158,488 @@
 //     }
 // });
 
+
+
     
+                                          //38. Создаем табы в новом проекте
+
+
+// window.addEventListener('DOMContentLoaded', () => {
+
+//     const tabs = document.querySelectorAll('.tabheader__item'),
+//           tabsContent = document.querySelectorAll('.tabcontent'),
+//           tabsParent = document.querySelector('.tabheader__items');
+
+//     function hideTabContent () {
+//         tabsContent.forEach(item => {
+//             item.classList.add('hide'); //Добавляем и удаляем классы (в которых табы)
+//             item.classList.remove('show', 'fade');
+//         });
+
+//         tabs.forEach(item => {
+//             item.classList.remove('tabheader__item_active');//Перебираем и удаляем дополнительный класс
+//         });
+//     }
+//     function showTabContent(i = 0) {//Ставим 0 по умолчанию, чтобы показывалась перавая картинка
+//         tabsContent[i].classList.add('show', 'fade');
+//         tabsContent[i].classList.remove('hide');
+//         tabs[i].classList.add('tabheader__item_active');
+//     }
+
+//     hideTabContent();
+//     showTabContent();
+
+//     tabsParent.addEventListener('click', (event) => {
+//         const target = event.target;//Помещаем в переменную, чтобы упростить написание
+
+//         if (target && target.classList.contains('tabheader__item')) {//Если событие клик происходит на объекте, то
+//             tabs.forEach((item, i) => {//происходит перебор объекта
+//                 if (target == item) {//Если событие при переборе равно кнопке, которую нажал пользователь, то
+//                     hideTabContent();//запускаются две функции
+//                     showTabContent(i);// в i - передается результат на какую кнопку нажали и запускает фуккцию 
+//                 }
+//             });
+
+            
+//         }
+//     });
+          
+// });                               
+                              
+
+
+
+                      //39. Скрипты и время их выполнения. setTimeout и setInterval
+
+
+    // const timerId = setTimeout(function(text) {//отсрочка выполнения функции на 2 сек
+    //     console.log(text);
+    // }, 2000, 'hello');// 'hello' передается в text
+
+    // const timerId = setTimeout(logger, 2000);
+    //  clearInterval(timerId);//Обнуляет интервал
+    //     function logger () {
+    //         console.log('text');
+    // }
+
+    // const btn = document.querySelector('.btn');
+    // let timerId,//так как функция, то чтобы переменная была не локальная, то выносим ее сюда
+    //     i = 0;
+
+    // btn.addEventListener('click', () => {
+    //     // const timerId = setTimeout(logger, 2000);
+    //        timerId = setInterval(logger, 500);//Срабатывает каждые 2 секунды
+    // });// У setInterval есть недостаток, так как функция может выполняться долго, то интервал не будет ее ждать,
+    //    // поэтому рекурсивная лучше.   
+
+    // function logger () {
+    //     if (i === 3) {
+    //         clearInterval(timerId);
+    //     }
+    //     console.log('text');
+    //     i++;
+    //     }
+
+    //     //Рекурсивная 
+    //     let id = setTimeout(function log(){
+    //         console.log('Hello');
+    //         id = setTimeout(log, 500);
+    //     }, 500);//Теперь у нас интервал между выполненим функции всегда одинаковый, так как он срабатывает четко 
+    //     //после выполнения функции
+   
+
+        // const btn = document.querySelector('.btn');
+        // let timerId,//так как функция, то чтобы переменная была не локальная, то выносим ее сюда
+        //     i = 0;
+
+        // function myAnimation() {
+        //     const elem = document.querySelector('.box');
+        //     let pos = 0;//задаем значение позиции
+
+        //     const id = setInterval(frame, 10);//интервал для запуска функции
+        //     function frame() {//frame(с анг. кадр)
+        //         if (pos == 300) {//Когда позиция будет равна 300, квадратик 
+        //             clearInterval(id);//остановится
+        //         } else {
+        //             pos++;
+        //             elem.style.top = pos + 'px';//Перемещение позиции согласно css, то есть мы к 0 + данные px
+        //             elem.style.left = pos + 'px';// из css по отступам
+        //         }
+        //     }
+        // }
+
+        // btn.addEventListener('click', myAnimation);//По клику запускается функция
+
+
+
+
+                                                  //40. Работа с датами
+    //get - запрашивает дату 
+    //set - устанавливает дату
+
+    // const now = new Date();//При таком значении выведет текущую дату
+
+  // console.log(now.setHours(18, 40));// Метод .setHours устанвливает согласно аргумента 18 часов, но есть особенности 
+  // console.log(now);//он выводит время по UTC, второй аргумент устанавливает 40 минут
+
+    // new Date.parse('2020-05-01');//Метод .parse аналогично set устанавливает дату
     
+    // console.log(now.getFullYear());//Метод getFullYear показывает год
+    // console.log(now.getMonth());//Отсчет месяца начинается с нуля поэтому май это 4 месяц
+    // console.log(now.getDate());// Показывает число
+    // console.log(now.getDay());//Показывает номер дня недели, где вс это 0, а сб 6
+    // console.log(now.getHours());//Местоное время 
+    // console.log(now.getUTCHours());//Время UTC
+
+    // console.log(now.getTimezoneOffset());//Показывает разницу местного времени в минутах от UTC
+    // console.log(now.getTime());//Показывает время в милисекудах прошедшее с 1970 года
+
+  // let start = new Date(); //Вычисляем время за которое выполнится цикл
+  //   for(let i = 0; i < 100000; i++) {
+  //     let some = i ** 3;
+  //   }
+
+  //   let end = new Date();
+  //   alert(`Цикл отработал за ${end - start} миллисекунд`);
+
+
+
+
+
+
+                               //41. Создаем таймер обратного отсчета на сайте
+
+
+// const deadline = '2020-07-19';//Дата окончания акции
+
+// function getTimeRemaining(endtime) {//Функция определяющая разницу между deadline и текущем временем
+// const t = Date.parse(endtime) - Date.parse(new Date()),//В endtime помещаем deadline и вычитаем настоящее время
+//       days = Math.floor(t / (1000 * 60 * 60 * 24)),//Math.floor - Округляем время, вычисляем коилчество милсек в дне 
+//       hours = Math.floor(t / (1000 * 60 * 60) % 24),//% - дает остаток, чтобы 40 часов конвертировалось в дни
+//       minutes = Math.floor((t / 1000 / 60) % 60),
+//       seconds = Math.floor((t / 1000) % 60);
+
+//   return {//Возвращает объект, то есть когда функция отработает этот объект отдаст наружу эти свойства
+//     'total': t,
+//     'days': days,
+//     'hours': hours,
+//     'minutes': minutes,
+//     'seconds': seconds
+//   };
+// }
+
+// function getZero(num) {//Функция, которая прибавляет одиночному числу 0
+//     if (num >= 0 && num < 10) {
+//         return `0 ${num}`;//Если меньше 10, то функция возвращает число с 0
+//     } else {
+//         return num; //Если приходит не единичное число, то ноль не добавляется
+//     }
+// }
+
+// function setClock(selector, endtime) {
+//     const timer = document.querySelector(selector),
+//           days = document.querySelector('#days'),
+//           hours = document.querySelector('#hours'),
+//           minutes = document.querySelector('#minutes'),
+//           seconds = document.querySelector('#seconds'),
+//           timeInterval = setInterval(updateClock, 1000);//Чтобы запускать функцию updateClock каждую секунду
+
+
+// updateClock();//Обновляет время, то есть при обновлении страницы время установленное в html не мигает
+// function updateClock() {//Функция получает инфу из return функции getTimeRemaining и выводит ее на страницу
+//     const t = getTimeRemaining(endtime);
+
+//     days.innerHTML = getZero(t.days);
+//     hours.innerHTML = getZero(t.hours);
+//     minutes.innerHTML = getZero(t.minutes);
+//     seconds.innerHTML = getZero(t.seconds);
+
+//     if (t.total <= 0) {//Останавливает таймер если его значение меньше или равно 0
+//         clearInterval(timeInterval);
+//     }
+// }
+
+// }
+
+// setClock('.timer', deadline);// Вот почему вместо .timer указан selector, он его подставил просто через функцию
+
+
+
+
+                              //42. Параметры документа, окна и работа с ними
+
+
+
+//         //Работа с элементом. Отсчет координат начинается с верхнего левого угла, что отличается от CSS
+//         //JS не может работать с псевдоэлементами CSS
+       
+//         const box = document.querySelector('.box'),
+//               btn = document.querySelector('button'),
+//             //   width = box.clientWidth,//Получаем ширину нашего модального окна
+//             //   height = box.clientHeight;//Высоту
+//             // width = box.offsetWidth,//Получаем ширину нашего модального окна как по CSS
+//             // height = box.offsetHeight;//Высоту
+//             width = box.scrollWidth,//Получаем ширину нашего модального окна 
+//             height = box.scrollHeight;//Высоту, но с учетом всей прокрутки (скроллинга)
+
+//               console.log(width, height);//В консоле выводится это значение
+
+//             btn.addEventListener('click', () => {//При нажатии на кнопку, обработчик дает команду элементу box через
+//                 //   box.style.height = box.scrollHeight + 'px';//стили CSS увеличить box на всю высоту скроллинга
+//                 console.log(box.scrollTop);//Показывает в px сколько проскролил, выводит инфу в консоль
+//               });
+
+//             //Синтаксис получения координат объекта:
+//             console.log(box.getBoundingClientRect());
+//             console.log(box.getBoundingClientRect().top);//Координаты только верхнего значения
+
+// const style = window.getComputedStyle(box);//С помощью этого метода смотрим CSS свойтсва элемента box и в переменую
+//               console.log(style);// Если нужен конкретный стиль, то console.log(style.display);
+
+// //Необходимо понимать, что inline стили JS может менять и они приорететнее CSS стилей, 
+// //которые JS может только смотреть. В случае со скролингом были применены inline стили.
+
+                                        
+//                                         //Работа с document и window
+
+//     console.log(document.documentElement.scrollTop);//Получаем количество px, которые пролистал пользователь
+//     //обязательно нужно указывать к document метод .documentElement, иначе .scrollTop к document не применится
+
+//     window.scrollBy(0, 400);//Прокрутка от текущей позиции, где 0 это x, который не изменяется, а 400 это y
+//     window.scrollTo(0, 400);//Действует относительно всей страницы
+
+
+
+     
+
+                                      //43. Создаем модальное окно
+
+
+
+// const modalTrigger = document.querySelectorAll('[data-modal]'), //[] - так как вызываем атрибут
+//       modal = document.querySelector('.modal'),
+//       modalCloseBtn = document.querySelector('[data-close]');
+     
+//       modalTrigger.forEach(btn => {//Используем команду для всех кнопок
+//         btn.addEventListener('click', () => {
+//             modal.classList.add('show');//Показать окно
+//             modal.classList.remove('hide');//Скрыть, но при помощи toggle это сделать проще пример ниже:
+//             // modal.classList.toggle('show');
+//             document.body.style.overflow = 'hidden';//Убираем скролл страницы, когда модальное окно открыто
+//           });
+//       });     
+
+//       function closeModal() {
+//         modal.classList.add('hide');
+//         modal.classList.remove('show');
+//         // modal.classList.toggle('show');
+//         document.body.style.overflow = '';// Восстанавливаем скролл страницы
+//       }
+
+//       modalCloseBtn.addEventListener('click', closeModal);//По нажатию запускаем функцию closeModal
+
+//       modal.addEventListener('click', (e) => {//Закрываем диалоговое окно по нажатию на окно
+//           if (e.target === modal) {//Если событие юзера происходит на окне, то 
+//             closeModal();// Вызваем функцию 
+//           }
+//       });
+
+//       document.addEventListener('keydown', (e) => {
+//         if (e.code === 'Escape' && modal.classList.contains('show')) {//Если открыто модальное окно, только тогда по 
+//             closeModal();//нажатию кнопки Escape, вызывается функция closeModal() и закрывает окно
+//         }
+//       });
+
+
+
+
+                                            //  44. Модификации модального окна
+                
+//  const modalTimerId = setTimeout(openModal, 3000);//Запускаем появление модального окна через 3 секунды
+
+//       function showModalByScroll() {
+// //Свойство window.pageYOffset отражает прокрученную часть по оси y. Свойство .documentElement.clientHeigh 
+// //показывает видимую часть экрана и если эта сумма будет больше или = свойству .documentElement.scrollHeight
+// //то есть скролинг достигнет низа экрана, то наступит событие всплывающего окна.
+//     if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+//         openModal();
+//         window.removeEventListener('scroll', showModalByScroll);// Чтобы при прокрутке страницы вниз модальное окно
+//         //появлялось один раз
+//     }
+//       }
+      
+//       window.addEventListener('scroll', showModalByScroll); //Чтобы модальное окно всплывало при скролинге вниз
+
+
+
+
+                                                //45. Функции-конструкторы
+
+
+// К этим функциям не нужен return, мы из них ничего не возвращаем. Могут содержать в себе методы и свойтсва
+//Конструкторы необходимы для создания новых однотипных объектов. К примеру создали прототип, а затем на 
+//его основе и с помощью свойства .prototype создали новый объект используя элементы протипа. Поэтому конструктор 
+
+
+//         function User(name, id) {//Функция конструктор, которая создает объект
+//           this.name = name;
+//           this.id = id;
+//           this.human = true;
+//           this.hello = function () {//Создаем метод hello
+//             console.log(`Hello ${this.name}`);
+//           };
+//         }
+
+//         User.prototype.exit = function() {//Создаем объект на основе нашего прототипа 
+//           console.log(`Пользователь ${this.name} ушел`);
+//         };
+       
+//         const ivan = new User('Ivan', 28),
+//               alex = new User('Alex', 28);
+
+//               ivan.exit();
+
+//               ivan.hello();//Вызываем метод
+//               alex.hello();
+
+//               console.log(ivan);
+//               console.log(alex);
+
+
+
+
+
+//                                                   //46. Контекст вызова. This
+
+// // 1. Обычнаяя функция: this = window, но если use strict - underfined
+//         function showThis(a, b) {
+//           console.log(this); 
+//             function sum() {
+//               console.log(this);
+//               return a + b;
+//             }   
+//             console.log(sum());      
+//         }
+//         showThis();
+
+  
+// // 2. Контекст вызова (this) у методов объекта - сам объект, если внутри метода сделать еще функцию с вызовом this,
+// // то он выдаст undefined, так как это простой вызов функции и он не относится к методу объекта.
+//         const obj = {
+//           a: 12,
+//           b: 24,
+//           sum: function() {
+//             console.log(this);
+//           }
+//         };
+//         obj.sum();
+
+// // 3. this в конструкторах и классах - это новый экземпляр объекта. То есть this  по отношению к свойству name,
+// // выступает как вновь созданный объект. Согласно нижеописанного случая в this помещена информация из пременной ivan
+//     function User(name, id) {//Функция конструктор, которая создает объект
+//       this.name = name;
+//       this.id = id;
+//       this.human = true;
+//       this.hello = function () {//Создаем метод hello
+//         console.log(`Hello ${this.name}`);
+//       };
+//     }
+//     let ivan = new User('Ivan', 28),
+
+// // 4. Ручное присвоение контекста: call, apply, bind
+//     function sayName(surname) {
+//       console.log(this);
+//       console.log(this.name);    
+//     }
+
+//     const user = {
+//       name: 'Bob'
+//     };
+
+//     sayName.call(user);//call и apply одинаковые методы, которые ссвязывают между собой конструкции. В данном 
+//     sayName.apply(user);//случае, значение из объекта user передается в функцию sayName. Отличие заключается в 
+//     //передаче аргументов например:
+//     sayName.call(user, 'Smith');//Где аргумент 'Smith' подставится в аргумент функции sayName(surname)
+//     sayName.apply(user, ['Smith']);//Тоже самое, только синтаксис в виде массива
+
+//     //Присвоение при помощи метода .bind, который создает новую функцию и под нее подвязывает контекст this
+//     function count(num) {
+//       return this*num;
+//     }
+
+//     const double = count.bind(2);//double это функция у которой есть привязанный контекст, где 2 передается в this
+//     console.log(double(3));// В num передается функция double
+//     console.log(double(13));
+
+// const btn = document.querySelector('button');
+// btn.addEventListener('click', function() {//Это сработает только с обычной функцией, контекст события
+//   this.style.backgroundColor = 'red';// будет сам элемент на котором произошло событие. Стрелочная не 
+// });//сработает, глянь ниже почему так...
+
+// // У стрелочной функции нет своего контекста вызова, она будет его брать у родителя, пример:
+//   const obj = {
+//     num: 5,
+//     sayNumber: function () {//Если бы это была обычная функция, то в консоль вывелось бы undefined, но так как 
+//       const say = () => {//в стрелочной функции нет своего контекста вызова, то она берет контекст у своего 
+//         console.log(this);//родителя, в данном случае ее родителем выступает метод sayNumber у которого контекст
+//       };//ссылается на объект в котором он расположен, поэтому this в стрелочной функции будет ссылаться на объект
+//       say();//то есть родителя метода в котором расположени стрелочная функция.
+//     }
+//   };
+//   obj.sayNumber();
+
+// const double = (a) => {
+//   return a * 2;
+// };// Так выглядит обычная стрелочная функция, но ее можно писать проще:
+// const double = a => a * 2;//return подставляется автоматически, а если аргумент один, то и скобки не обязательны
+// console.log(double(10));
+
+
+
+
+
+                                               //47. Классы (ES6)
+
+// //Классы служат для шаблонизации, то есть мы создаем шаблон на основе которого построим много компонентов для сайта,
+// //так называемая концепция. А экземпляры это то, что на основе концепции мы создаем.
+
+//     class Rectangle {//Название класса всегда начинается с заглавной буквы. Между {} - ; не ставится
+//       constructor(height, width) {//Свойство конструктор это тот же объект, конструирует класс в скобках принимает 
+//           this.height = height;// аргументы из вне при создании экземпляра класса. this обращается к экземпляру 
+//           this.width = width;//нового созданного объекта к каждому отдельному квадратику. = width берется из 
+//       }//constructor(height, width) и записывается в свойство this.width
+//       calcAreal() {// Вычисляем площадь. Сам метод записывается без function
+//         return this.height * this.width;//Контекст вызова this. ссылается на новый объект, который будет создан
+//       }// (this.width = width;) и берем из него свойство .height и .width
+//     }
+
+//     class ColoredReactangleWithText extends Rectangle {//extends метод наследования, где левое наследует от правого
+//       constructor(height, width, text, bgColor) {
+//         super(height, width);//Метод, который вызывает от наследодателя свойства this.height = height; 
+//       // и this.width = width; и должен всегда идти ПЕРВОЙ строчкой в конструкторе
+//         this.text = text;
+//         this.bgColor = bgColor;
+//     }
+//     showMyProps() {
+//       console.log(`Текст: ${this.text}, цвет: ${this.bgColor}`);
+//     }
+//     }
+
+//     const div = new ColoredReactangleWithText(20, 30, 'hi', 'blue');
+//     div.showMyProps();
+//     console.log(div.calcAreal());
+
+
+//  const square = new Rectangle(10, 10);//В переменную square помещаем объект, который создается при помощи класса
+//  //Rectangle у которого в теле есть два свойства this.height = height; и this.width = width; и которым присваивается
+//  // значение (10, 10); Результат записывается в переменную.
+//  const long = new Rectangle(103, 10);
+
+//     console.log(square.calcAreal());
+//     console.log(long.calcAreal());
+
+
+
+                                    
+  
+                                          //48. Используем классы в реальной работе
